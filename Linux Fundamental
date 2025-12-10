@@ -1,1 +1,17 @@
 ## Linux Fundamental
+
+
+1. File System 
+### pwd => Print Working Diractory
+### cd  => Change Diractory
+### ls => Folder Listing
+### mkdir => make diractory
+### rmdir => remove diractory
+### cp => copy file 
+### rm => remove file 
+### mv => move file .
+### locate => search file (kind of window file search)
+### passwd => password change 
+### man => description for tools
+### ls -la => file describ ( permision )
+### echo > "file name" text.text => file make
