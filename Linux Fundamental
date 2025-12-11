@@ -32,3 +32,11 @@
 adduser => user account create 
 su = user (switch)
 deluser "name"
+
+==================================
+
+2. User management 
+
+### Root User(SuperUser) => Full system
+
+
