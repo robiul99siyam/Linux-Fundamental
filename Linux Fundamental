@@ -15,3 +15,20 @@
 ### man => description for tools
 ### ls -la => file describ ( permision )
 ### echo > "file name" text.text => file make
+
+====================================
+### Nano "file name"=> (Write command) 
+### cat "file name" => (read command)
+### touch => (make file)
+### Whoami => current User Dekhar Jonno
+### Sudo su => Super Admin
+### Sudo apt update && sudo apt upgrade -y 
+### ifconfig (ip address check)
+### uname -a (kali)
+### history (command history)
+
+=====================================
+
+adduser => user account create 
+su = user (switch)
+deluser "name"
