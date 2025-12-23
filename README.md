@@ -1,4 +1,4 @@
-🖥️ Linux & Windows Fundamentals
+#🖥️ Linux & Windows Fundamentals
 
 This repository contains my learning notes and practice commands for Linux and Windows (Command Prompt) fundamentals.
 It is mainly focused on file system, user management, networking, package management, and basic system operations.
