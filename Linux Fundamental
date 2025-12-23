@@ -40,3 +40,47 @@ deluser "name"
 ### Root User(SuperUser) => Full system
 
 
+
+==> 1. Windows কী?
+
+Windows হলো Microsoft-এর তৈরি একটি Operating System (OS)
+যেটা দিয়ে আমরা:
+
+Computer চালাই
+Software ব্যবহার করি
+File, user, network manage করি
+
+==> Linux যেমন OS, Windows-ও তেমন OS
+
+===========================================
+| Folder             | কাজ           |
+| ------------------ | ------------- |
+| `C:\Windows`       | OS files      |
+| `C:\Program Files` | Software      |
+| `C:\Users`         | User profiles |
+| `C:\Temp`          | Temp files    |
+==============================================
+| Shortcut         | কাজ           |
+| ---------------- | ------------- |
+| Win + E          | File Explorer |
+| Alt + Enter      | Properties    |
+| Ctrl + Shift + N | New folder    |
+=============================================
+
+
+==> Command Prompt (CMD) (Win + R)
+| Command      | কাজ               |
+| ------------ | ----------------- |
+| `dir`        | Folder list দেখায় |
+| `cd`         | Folder change     |
+| `cd ..`      | এক ধাপ পিছনে      |
+| `mkdir test` | Folder বানায়      |
+| `rmdir test` | Folder delete     |
+| `cls`        | Screen clear      |
+
+====> Networking (Basic)
+ipconfig
+ping google.com
+netstat -ano
+
+
